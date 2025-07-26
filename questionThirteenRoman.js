@@ -55,47 +55,48 @@ var romanToInt = function(s) {
     let romanArr = s.split('')
     let i = 0;
     let numberArr = []
+    //     I can be placed before V (5) and X (10) to make 4 and 9. 
+//     X can be placed before L (50) and C (100) to make 40 and 90. 
+//     C can be placed before D (500) and M (1000) to make 400 and 900.
+
     while(i < romanArr.length ){
          console.log("x: ", i)
+         let j = i + 1;
 
-        if(romanArr[i] == 'I' && romanArr[++i] == 'V'){
-            numberArr[--i] = 4
-            ++i
-        }
-        
-        // if(romanArr[i] == 'I' && romanArr[++i] == 'X'){
-        //     numberArr[--i] = 9
-        // }
-        // if(romanArr[i] == 'X' && romanArr[++i] == 'L'){
-        //     numberArr[--i] = 40
-        // }
-        // if(romanArr[i] == 'X' && romanArr[++i] == 'C'){
-        //     numberArr[--i] = 90
-        // }
-        // if(romanArr[i] == 'X' && romanArr[++i] == 'D'){
-        //     numberArr[--i] = 400
-        // }
-        // if(romanArr[i] == 'X' && romanArr[++i] == 'M'){
-        //     numberArr[--i] = 900
-        // }
-        else{
-        numberArr[i] = returnValue(romanArr[i])
-        }
-        i++     
-        console.log('x2: ', i)
-        
-        console.log(numberArr)
-          
+         if(returnValue(romanArr[i]) != -1){
+            numberArr[i] = returnValue(romanArr[i])
+            
+         }
+         //here we check if I is followed by V to return the value 4
+         if(romanArr[i] === 'I' && romanArr[j] === 'V'){
+            numberArr[i] = 4
+            i++
+            console.log(numberArr)
+         }
+         if(romanArr[i] === 'I' && romanArr[j] === 'X'){
+            numberArr[i] = 9
+            i++
+         }
+         if(romanArr[i] ===  'X' && romanArr[j] === 'L'){
+            numberArr[i] = 40
+            i++
+         }
+         if(romanArr[i] === 'X' && romanArr[j] === 'C'){
+            numberArr[i] = 90
+            i++
+         }
+         if(romanArr[i] ===  'C' && romanArr[j] === 'D'){
+            numberArr[i] = 400
+            i++
+         }
+         if(romanArr[i] === 'C' && romanArr[j] === 'M'){
+            numberArr[i] = 900
+            i++
+         }
+         i++     
     }
     console.log(parseInt(numberArr.join('')))
     return parseInt(numberArr.join(''))
-
-      
-
-        // numberArr[i] = romanArr[i])
-        // // console.log(numberArr)
-        
-
 
 };
 
@@ -107,8 +108,9 @@ let returnValue = (x) => {
     if(x === 'C') return 100
     if(x === 'D') return 500
     if(x === 'M') return 1000
+    return -1
     
 }
 
-let s = 'IVX'
+let s = 'III'
 romanToInt(s)
